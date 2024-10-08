@@ -29,16 +29,16 @@ git clone https://github.com/yourusername/bitcoin-price-analysis.git
 ```bash
 pip install -r requirements.txt
 ```
-Usage
+## Usage
 After setting up the environment and installing the dependencies, run the script to fetch, analyze, and visualize Bitcoin prices, as well as forecast the next 10 days of prices.
 ```bash
 python bitcoin_analysis.py
 ```
 ## Dependencies
-# requests
-# pandas
-# matplotlib
-# statsmodels
+- requests
+- pandas
+- matplotlib
+- statsmodels
 You can install these dependencies using:
 ```bash
 pip install requests pandas matplotlib statsmodels
