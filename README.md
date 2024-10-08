@@ -35,11 +35,26 @@ After setting up the environment and installing the dependencies, run the script
 python bitcoin_analysis.py
 ```
 ## Dependencies
+<pre style="background-color: #333; color: white; padding: 10px;">
 - requests
 - pandas
 - matplotlib
 - statsmodels
+</pre>
+
 You can install these dependencies using:
 ```bash
 pip install requests pandas matplotlib statsmodels
+```
+## Example Output
+- Price Trend Visualization:
+- Daily Percentage Change:
+- Forecasted Prices:
+
+```python
+Date            Forecasted Price
+2024-10-08      27,000.12
+2024-10-09      27,200.45
+...
+
 ```
