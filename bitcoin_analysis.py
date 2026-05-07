@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from statsmodels.tsa.arima.model import ARIMA
 import warnings
+from functools import lru_cache
 
 # Disabling ARIMA model warnings
 warnings.filterwarnings("ignore")
@@ -11,14 +12,21 @@ warnings.filterwarnings("ignore")
 # 1st step: Fetching data
 # Function to fetch Bitcoin prices using CoinGecko API
 
-def fetch_bitcoin_data(days=30):
+@lru_cache(maxsize=32)
+def _fetch_raw_bitcoin_data(days):
     """
-    Fetches the last 'days' days of Bitcoin prices from CoinGecko API.
+    Helper function to fetch and cache the raw JSON response from CoinGecko API.
     """
     url = "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart"
     params = {'vs_currency': 'usd', 'days': days}
     response = requests.get(url, params=params)
-    data = response.json()
+    return response.json()
+
+def fetch_bitcoin_data(days=30):
+    """
+    Fetches the last 'days' days of Bitcoin prices from CoinGecko API.
+    """
+    data = _fetch_raw_bitcoin_data(days)
     # Converting prices to DataFrame
     prices = pd.DataFrame(data['prices'], columns=['timestamp', 'price'])
     prices['date'] = pd.to_datetime(prices['timestamp'], unit='ms')
